@@ -6,12 +6,15 @@
   font-family: "DMSans-Bold";
   src: url("font/DMSans-Bold.ttf");
 }
+html {
+  display: flex;
+  justify-content: center;
+}
+
 body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   width: 90%;
-  background-color: aqua;
 }
 
 header {
@@ -19,18 +22,140 @@ header {
   flex-direction: column;
   align-items: center;
   margin-top: 50px;
-  background-color: bisque;
 }
 
 h1 {
   font-family: "DMSans";
   color: #D04F4F;
   margin-top: 0;
+  font-weight: bold;
 }
 
-input {
+#search {
+  position: relative;
+  margin-bottom: 50px;
+}
+#search button {
+  position: absolute;
+  top: 7px;
+  right: 0px;
+  border: none;
+  background-color: #E7E7E7;
+}
+
+#searchBar {
   width: 100%;
-  padding: 30px;
+  padding: 15px;
+  background-color: #E7E7E7;
+  border: none;
+  border-radius: 5px;
+}
+#searchBar:focus {
+  outline: none;
+}
+
+#tags {
+  margin-bottom: 50px;
+  color: #3282F7;
+}
+
+.col {
+  background-color: #D04F4F;
+}
+
+.container {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background-color: black;
+}
+
+.Img {
+  height: 50%;
+  background-color: #C7BEBE;
+  height: 178px;
+  border-radius: 5px;
+}
+
+.box {
+  border-radius: 5px;
+  background-color: #E7E7E7;
+  width: 30%;
+  padding: 0;
+  margin-bottom: 20px;
+  height: 360px;
+}
+
+#card {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.infoUp {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+  width: 90%;
+  font-size: 18px;
+}
+
+.infoDown {
+  font-size: 12px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+.infoDown .ingr {
+  width: 40%;
+}
+.infoDown .ingr p {
+  margin-bottom: -1px;
+  line-height: 14px;
+}
+.infoDown .recipe {
+  width: 40%;
+  display: block;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
+  max-height: 6.15em;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+.infoDown .recipe p {
+  line-height: 12px;
+}
+
+input[type=search]::-webkit-search-cancel-button {
+  display: none;
+}
+
+.wrapper .search-input {
+  background-color: #3282F7;
+  color: white;
+}
+.wrapper .search-input input {
+  border: none;
+  border-radius: 5px;
+  padding: 20px;
+}
+.wrapper .search-input input:focus {
+  outline: none;
+  width: 500px;
+}
+.wrapper .search-input .autocom-box {
+  overflow-y: auto;
+}
+.wrapper .search-input .autocom-box li {
+  list-style: none;
+  padding-left: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */

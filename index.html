@@ -1,17 +1,46 @@
 <!DOCTYPE html>
-<head>
-    <meta charset="utf-8">
-    <title>Les petits plats</title>
-    <link rel="stylesheet" href="style.css">
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <script src="https://kit.fontawesome.com/74945adf53.js" crossorigin="anonymous"></script>
-</head>
-<body>
-    <header>
-        <div><img src="Toque.png" alt="Logo"></div>
-        <h1>Les petits plats</h1>
-    </header>
-    <input type="search" value="Rechercher une recette"><button><img src="Search.png" alt=""></button>
-    <div id="tags"></div>
-    <section id="recette"></section>
-</body>
+<html lang="fr">
+    <head>
+        <meta charset="utf-8">
+        <title>Les petits plats</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="https://kit.fontawesome.com/74945adf53.js" crossorigin="anonymous"></script>
+    </head>
+    <body>
+        <header>
+            <div><img src="Toque.png" alt="Logo"></div>
+            <h1>Les petits plats</h1>
+        </header>
+<!-- search -->
+        <section id="search">
+            <input type="search" placeholder="Rechercher une recette" id="searchBar"><button><img src="Search.png" alt=""></button>
+        </section>
+<!-- filtre -->
+        <section id="tags">
+            <!-- <div class="tag">
+                <input type="search" placeholder="Ingrédients" class="tag-input" id="ingr"><img src="Vector.png" alt="">
+            </div> -->
+            <div class ="wrapper">
+                <div class="search-input">
+                    <input type="search" placeholder="Ingrédients" class="tag-input" id="ingr"><img src="Vector.png" alt="">
+                    <divc class="autocom-box">
+                        <li>ok</li>
+                        <li>fr</li>
+                        <li>hy</li>
+                        <li>sz</li>
+                    </div>
+                </div>
+            </div>
+            <div></div>
+        </section>
+<!-- display -->
+        <section id="card" class="row row-cols-3">
+            
+        </section>
+        <footer></footer>
+        <script src="index.js"></script>
+    </body>
+</html>
