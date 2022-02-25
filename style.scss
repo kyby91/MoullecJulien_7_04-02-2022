@@ -72,7 +72,6 @@ h1{
 
 #tags{
     margin-bottom: 50px;
-    color: #3282F7;
 }
 
 .col{
@@ -201,24 +200,80 @@ input[type="search"]::-webkit-search-cancel-button {
 
 
 .wrapper{
+    width: fit-content;
+    max-width: 500px;
     .search-input{
         background-color: #3282F7;
         color: white;
+        position: relative;
+        border-radius: 10px;
         input{
             border: none;
             border-radius: 5px;
             padding: 20px;
+            background-color: #3282F7;
+            &::placeholder{
+                color: white;
+            }
             &:focus{
                 outline: none;
                 width: 500px;
             }
         }
+        .arrowDown{
+            position: absolute;
+            top: 25px;
+            right: 10px;
+            cursor: pointer;
+            transform: rotate(180deg)
+        }
+        .arrowUp{
+            position: absolute;
+            top: 25px;
+            right: 10px;
+            cursor: pointer;
+            display: none;
+        }
         .autocom-box{
             overflow-y: auto;
+            display: none;
+            flex-wrap: wrap;
+            max-height: 400px;
             li{
                 list-style: none;
                 padding-left: 15px;
+                cursor: default;
+                width: 33.3%;
             }
+        }
+    }
+}
+
+
+
+.autocom-box::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+
+.badge{
+    padding-left: 0;
+    margin-bottom: 12px;
+    div{
+        background-color: black;
+        display: flex;
+        padding: 5px 15px 5px 15px;
+        border-radius: 5px;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        p{
+            padding-right: 20px;
+            font-size: 13px;
+            font-weight: normal;
+            margin: 0;
         }
     }
 }

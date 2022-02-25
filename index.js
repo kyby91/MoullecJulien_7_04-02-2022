@@ -1,6 +1,10 @@
 //DOM
 const card = document.getElementById('card')
 const searchBtn = document.getElementById('search')
+const searchIngr = document.getElementById('ingr')
+const box = document.getElementById('box-ingr')
+const arrowUp = document.getElementsByClassName('arrowUp')
+const arrowDown = document.getElementsByClassName('arrowDown')
 
 
 
@@ -10,60 +14,27 @@ fetch('recipes.json').then(response => {
     return response.json();
   }).then(data => {
     console.log(data);
-    
-
-     
 
     displayRecipes(data)
 
+    searchBar(data)
 
-
-
-    searchBtn.addEventListener('keyup', (key) =>{
-      const value = key.target.value.toLowerCase()
-    
-      if (value.length>= 3) {
-        const filterRecipe = data.filter((data) =>{
-          return (
-            data.name.toLowerCase().includes(value) ||
-            data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
-            data.ustensils.some(u => u.toLowerCase().includes(value))  ||
-            data.appliance.toLowerCase().includes(value)
-          )
-        })
-        card.innerHTML = ""
-        displayRecipes(filterRecipe)
-
-      } else {
-        card.innerHTML = ""
-        displayRecipes(data)
-      }
-    
-      console.log(value);
-    })
-
-
+    // let test = "tota"
+    // console.log(test.substr(0,3) + '...')
 
     let arrayIngr = []
     let arrayApp = []
     let arrayUst = []
 
-    
 
     data.forEach(element =>{
       element.ingredients.forEach(element =>{
         arrayIngr.push(element.ingredient.toLowerCase())
       })
-    })
-
-    data.forEach(element =>{
-      arrayApp.push(element.appliance)
-    })
-
-    data.forEach(element =>{
       element.ustensils.forEach(element =>{
         arrayUst.push(element)
       })
+      arrayApp.push(element.appliance)
     })
 
     let x = [...new Set(arrayIngr)]
@@ -72,7 +43,76 @@ fetch('recipes.json').then(response => {
     console.log(x, y, z);
 
 
+    function displayIngr (tab , boxTag, tagType) {
+      tab.forEach(element =>{
+        const li = document.createElement('li')
+        li.innerHTML = element
+      
+        boxTag.appendChild(li)
+
+        li.addEventListener('click', e=>{
+          console.log('ok');
+        })
+
+      })
+    }
+
+    function setTag(tab , tagType){
+      let searchInput = document.getElementById(tagType)
+      let boxTagList = document.getElementById('box-' + tagType)
+      console.log(searchInput, boxTagList)
+
+      searchInput.addEventListener('click', ()=> {
+        displayIngr(tab, boxTagList, tagType)
+        boxTagList.style.display = 'flex'
+      })
+    }
+   
+    // searchInput.addEventListener('click', ()=>{
+
+
     
+    // searchIngr.addEventListener('click', ()=>{
+    //   box.style.display = 'flex'
+    //   // arrowDown.style.display = 'none'
+    //   // arrowUp.style.display = 'block'
+    //   // box.querySelectorAll(".arrowDown").style.display = 'none'
+    //   displayIngr(x)
+    //   // displayTagHTML(y , 'ingredient')
+    // //   displayTagHTML(z , 'applience')
+    // })
+
+
+    //fnc createTagHTML(tagName = "Coco" , tagType = "ingredient")
+
+    setTag(x, "ingr")
+    setTag(y, "apli")
+
+    searchIngr.addEventListener('keyup', (key) =>{
+      const value = key.target.value.toLowerCase()
+      if (value.length>= 3) {
+        const filterRecipe = x.filter((x) =>{
+          return (
+            x.includes(value) 
+          )
+        })
+        box.innerHTML = ""
+        displayIngr(filterRecipe) 
+      } else {
+        box.innerHTML = ""
+        displayIngr(x)
+      }    
+      console.log(value);
+    })
+
+    // box.forEach(element =>{
+    //   element.addEventListener('click', e=>{
+    //     console.log('ok');
+    //   })
+    // })
+
+    // console.log(box);
+   
 
   }).catch(error => {
     console.error(error)
@@ -119,9 +159,9 @@ function displayRecipes(data) {
         if (element.unit) {
           ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>'+ ': ' + element.quantity + ' ' + element.unit
         } else if (element.quantity) {
-          ingredient.innerHTML = element.ingredient + ': ' + element.quantity
+          ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>' + ': ' + element.quantity
         } else {
-          ingredient.innerHTML = element.ingredient
+          ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>'
         }
         divIngr.appendChild(ingredient)
     })
@@ -135,8 +175,27 @@ function displayRecipes(data) {
 
 
 
-var arr = [1,2,3,4,1,2,3,1,2,3]
+function searchBar(data) {
+  searchBtn.addEventListener('keyup', (key) =>{
+    const value = key.target.value.toLowerCase()
+  
+    if (value.length>= 3) {
+      const filterRecipe = data.filter((data) =>{
+        return (
+          data.name.toLowerCase().includes(value) ||
+          data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
+          data.ustensils.some(u => u.toLowerCase().includes(value))  ||
+          data.appliance.toLowerCase().includes(value)
+        )
+      })
+      card.innerHTML = ""
+      displayRecipes(filterRecipe)
 
-var uniqueArr = [...new Set(arr)]
-
-console.log(uniqueArr)
+    } else {
+      card.innerHTML = ""
+      displayRecipes(data)
+    }
+  
+    console.log(value);
+  })
+}
