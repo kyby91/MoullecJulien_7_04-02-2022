@@ -13,7 +13,6 @@ const arrowDown = document.getElementsByClassName('arrowDown')
 fetch('recipes.json').then(response => {
     return response.json();
   }).then(data => {
-    console.log(data);
 
     displayRecipes(data)
 
@@ -40,18 +39,33 @@ fetch('recipes.json').then(response => {
     let x = [...new Set(arrayIngr)]
     let y = [...new Set(arrayApp)]
     let z = [...new Set(arrayUst)]
-    console.log(x, y, z);
 
 
-    function displayIngr (tab , boxTag, tagType) {
+    function displayIngr (tab , boxTagList, tagType) {
+     
       tab.forEach(element =>{
         const li = document.createElement('li')
         li.innerHTML = element
-      
-        boxTag.appendChild(li)
+        
+        boxTagList.appendChild(li)
 
         li.addEventListener('click', e=>{
           console.log('ok');
+          console.log(tagType);
+          console.log(e.target.innerHTML);
+          value = e.target.innerHTML
+          const badge = document.getElementById('badge')
+          let div = document.createElement('div')
+          div.setAttribute('class', 'badge-' + tagType)
+          let p = document.createElement('p')
+          p.innerHTML = value
+          let img = document.createElement('img')
+          img.setAttribute('src', 'Quit.png')
+          console.log(div);
+
+          badge.appendChild(div)
+          div.appendChild(p)
+          div.appendChild(img)
         })
 
       })
@@ -67,7 +81,14 @@ fetch('recipes.json').then(response => {
         boxTagList.style.display = 'flex'
       })
     }
-   
+
+
+    //fnc createTagHTML(tagName = "Coco" , tagType = "ingredient")
+    function createTagHTML() {
+    }
+
+
+
     // searchInput.addEventListener('click', ()=>{
 
 
@@ -83,10 +104,11 @@ fetch('recipes.json').then(response => {
     // })
 
 
-    //fnc createTagHTML(tagName = "Coco" , tagType = "ingredient")
+    
 
     setTag(x, "ingr")
     setTag(y, "apli")
+    setTag(z, "ust")
 
     searchIngr.addEventListener('keyup', (key) =>{
       const value = key.target.value.toLowerCase()

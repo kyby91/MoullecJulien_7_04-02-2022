@@ -140,8 +140,25 @@ input[type=search]::-webkit-search-cancel-button {
   width: fit-content;
   max-width: 500px;
 }
-.wrapper .search-input {
+.wrapper #container-ingredient {
   background-color: #3282F7;
+}
+.wrapper #container-ingredient input {
+  background-color: #3282F7;
+}
+.wrapper #container-appliance {
+  background-color: #68D9A4;
+}
+.wrapper #container-appliance input {
+  background-color: #68D9A4;
+}
+.wrapper #container-ustensils {
+  background-color: #ED6454;
+}
+.wrapper #container-ustensils input {
+  background-color: #ED6454;
+}
+.wrapper .search-input {
   color: white;
   position: relative;
   border-radius: 10px;
@@ -150,7 +167,6 @@ input[type=search]::-webkit-search-cancel-button {
   border: none;
   border-radius: 5px;
   padding: 20px;
-  background-color: #3282F7;
 }
 .wrapper .search-input input::placeholder {
   color: white;
@@ -190,20 +206,32 @@ input[type=search]::-webkit-search-cancel-button {
   display: none;
 }
 
-.badge {
+#badge {
   padding-left: 0;
   margin-bottom: 12px;
+  display: flex;
 }
-.badge div {
-  background-color: black;
+#badge .badge-ingr {
+  background-color: #3282F7;
+}
+#badge .badge-apli {
+  background-color: #68D9A4;
+}
+#badge .badge-ust {
+  background-color: #ED6454;
+}
+#badge div {
   display: flex;
   padding: 5px 15px 5px 15px;
   border-radius: 5px;
   justify-content: center;
   align-items: center;
   text-align: center;
+  width: fit-content;
+  color: white;
+  margin-right: 15px;
 }
-.badge div p {
+#badge div p {
   padding-right: 20px;
   font-size: 13px;
   font-weight: normal;

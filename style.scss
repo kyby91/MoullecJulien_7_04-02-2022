@@ -142,56 +142,6 @@ h1{
     }
 }
 
-// .tag{
-//     position: relative;
-//     width: fit-content;
-//     img{
-//         position: absolute;
-//         top: 25px;
-//         right: 10px;
-//         transform: rotate(180deg);
-//     }
-//     input{
-//         border: none;
-//         border-radius: 5px;
-//         padding: 20px;
-//         &:focus{
-//             outline: none;
-//             width: 500px;
-//         }
-//     }
-// }
-
-// #ingr{
-//     background-color: #3282F7;
-//     &::placeholder{
-//         color: #FFFFFF;
-//     }
-// }
-
-// .dropdown{
-//     background-color: #3282F7;
-//     button{
-//         background-color: #3282F7;
-//         &:hover{
-//             background-color: #3282F7;
-//         }
-//         &:focus{
-//             background-color: #3282F7;
-//         }
-//     }
-// }
-// .dropdown-menu{
-//     display: none;
-//     background-color: #3282F7;
-//     &::after{
-//         display: flex;
-//     }
-// }
-
-// .dropdown-item{
-//     background-color: #3282F7;
-// }
 
 
 input[type="search"]::-webkit-search-cancel-button {
@@ -202,8 +152,24 @@ input[type="search"]::-webkit-search-cancel-button {
 .wrapper{
     width: fit-content;
     max-width: 500px;
-    .search-input{
+    #container-ingredient{
         background-color: #3282F7;
+        input{
+            background-color: #3282F7;
+        }
+    }
+    #container-appliance{
+        background-color: #68D9A4;
+        input{
+            background-color: #68D9A4;
+        }
+    }#container-ustensils{
+        background-color: #ED6454;
+        input{
+            background-color: #ED6454;
+        }
+    }
+    .search-input{
         color: white;
         position: relative;
         border-radius: 10px;
@@ -211,7 +177,6 @@ input[type="search"]::-webkit-search-cancel-button {
             border: none;
             border-radius: 5px;
             padding: 20px;
-            background-color: #3282F7;
             &::placeholder{
                 color: white;
             }
@@ -258,17 +223,29 @@ input[type="search"]::-webkit-search-cancel-button {
 
 
 
-.badge{
+#badge{
     padding-left: 0;
     margin-bottom: 12px;
+    display: flex;
+    .badge-ingr{
+        background-color: #3282F7;
+    }
+    .badge-apli{
+        background-color: #68D9A4;
+    }
+    .badge-ust{
+        background-color: #ED6454;
+    }
     div{
-        background-color: black;
         display: flex;
         padding: 5px 15px 5px 15px;
         border-radius: 5px;
         justify-content: center;
         align-items: center;
         text-align: center;
+        width: fit-content;
+        color: white;
+        margin-right: 15px;
         p{
             padding-right: 20px;
             font-size: 13px;
