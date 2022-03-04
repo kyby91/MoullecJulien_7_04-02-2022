@@ -5,6 +5,7 @@ const searchIngr = document.getElementById('ingr')
 const box = document.getElementById('box-ingr')
 const arrowUp = document.getElementsByClassName('arrowUp')
 const arrowDown = document.getElementsByClassName('arrowDown')
+const badge = document.getElementById('badge')
 
 
 
@@ -28,7 +29,7 @@ fetch('recipes.json').then(response => {
 
     data.forEach(element =>{
       element.ingredients.forEach(element =>{
-        arrayIngr.push(element.ingredient.toLowerCase())
+        arrayIngr.push(element.ingredient)
       })
       element.ustensils.forEach(element =>{
         arrayUst.push(element)
@@ -46,46 +47,78 @@ fetch('recipes.json').then(response => {
       tab.forEach(element =>{
         const li = document.createElement('li')
         li.innerHTML = element
-        
         boxTagList.appendChild(li)
 
         li.addEventListener('click', e=>{
-          console.log('ok');
-          console.log(tagType);
-          console.log(e.target.innerHTML);
-          value = e.target.innerHTML
-          const badge = document.getElementById('badge')
-          let div = document.createElement('div')
-          div.setAttribute('class', 'badge-' + tagType)
-          let p = document.createElement('p')
-          p.innerHTML = value
-          let img = document.createElement('img')
-          img.setAttribute('src', 'Quit.png')
-          console.log(div);
+          // console.log(tagType);
+          // console.log(e.target.innerHTML);
+          creatTag(e.target.innerHTML, tagType)
+          
+          filterTags()
 
-          badge.appendChild(div)
-          div.appendChild(p)
-          div.appendChild(img)
+          // console.log(closeBadge);
         })
 
       })
     }
 
+    function creatTag(nameTag, tagType){
+        let divTag = document.createElement('div')
+        divTag.setAttribute('class', 'badge-' + tagType)
+
+        let p = document.createElement('p')
+        p.innerHTML = nameTag
+
+        let img = document.createElement('img')
+        img.setAttribute('src', 'Quit.png')
+
+        console.log(divTag);
+        divTag.appendChild(p)
+        divTag.appendChild(img)
+
+        img.addEventListener('click', e => {
+          console.log('ok',e.target.parentNode.remove())
+          filterTags()
+        })
+
+        badge.appendChild(divTag)
+    }
+
     function setTag(tab , tagType){
       let searchInput = document.getElementById(tagType)
       let boxTagList = document.getElementById('box-' + tagType)
-      console.log(searchInput, boxTagList)
 
       searchInput.addEventListener('click', ()=> {
         displayIngr(tab, boxTagList, tagType)
         boxTagList.style.display = 'flex'
       })
+
+      //Lancer fonction de recharche
+      searchInput.addEventListener('keyup', (key) =>{
+        const value = key.target.value.toLowerCase()
+        if (value.length>= 3) {
+          const filterRecipe = tab.filter((tab) =>{
+            return (
+              tab.includes(value) 
+            )
+          })
+          box.innerHTML = ""
+          console.log(filterRecipe);
+          displayIngr(filterRecipe, boxTagList, tagType)
+        } else {
+          box.innerHTML = ""
+          console.log(tab);
+          displayIngr(tab, boxTagList, tagType)
+        }    
+        console.log(value);
+      })
+  
     }
 
 
     //fnc createTagHTML(tagName = "Coco" , tagType = "ingredient")
-    function createTagHTML() {
-    }
+    // function createTagHTML() {
+    // }
 
 
 
@@ -110,36 +143,62 @@ fetch('recipes.json').then(response => {
     setTag(y, "apli")
     setTag(z, "ust")
 
-    searchIngr.addEventListener('keyup', (key) =>{
-      const value = key.target.value.toLowerCase()
-      if (value.length>= 3) {
-        const filterRecipe = x.filter((x) =>{
-          return (
-            x.includes(value) 
-          )
-        })
-        box.innerHTML = ""
-        displayIngr(filterRecipe) 
-      } else {
-        box.innerHTML = ""
-        displayIngr(x)
-      }    
-      console.log(value);
-    })
-
-    // box.forEach(element =>{
-    //   element.addEventListener('click', e=>{
-    //     console.log('ok');
-    //   })
+    // searchIngr.addEventListener('keyup', (key) =>{
+    //   const value = key.target.value.toLowerCase()
+    //   let boxTagList = document.getElementById('box-ingr')
+    //   let tagType = "ingr"
+    //   if (value.length>= 3) {
+    //     const filterRecipe = x.filter((x) =>{
+    //       return (
+    //         x.includes(value) 
+    //       )
+    //     })
+    //     box.innerHTML = ""
+    //     console.log(filterRecipe);
+    //     displayIngr(filterRecipe, boxTagList, tagType)
+    //   } else {
+    //     box.innerHTML = ""
+    //     console.log(x);
+    //     displayIngr(x, boxTagList, tagType)
+    //   }    
+    //   console.log(value);
     // })
 
-    // console.log(box);
+
+    // if (value.length>= 3) {
+    //   const filterRecipe = data.filter((data) =>{
+    //     return (            
+    //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  
+    //     )
+    //   })
+    //   card.innerHTML = ""
+    //   displayRecipes(filterRecipe)
+
+    // } else {
+    //   card.innerHTML = ""
+    //   displayRecipes(data)
+    // }
+   
+    function filterTags() {
+      let tags = badge.querySelectorAll('div')
+      console.log(tags[0].innerText , tags);
+      const value = tags[0].innerText.toLowerCase()
+
+      tags.forEach(element =>{
+        console.log(element.innerText);
+
+        //FITRER
+      })
+    }
+
+    // let closeBadge = badge.querySelectorAll('img')
+    // console.log(closeBadge);
+  
    
 
   }).catch(error => {
     console.error(error)
 });
-
 
 
 function displayRecipes(data) {
@@ -153,8 +212,12 @@ function displayRecipes(data) {
 
     const divInfoUp = document.createElement('div')
     divInfoUp.setAttribute('class', 'infoUp')
-    const title = document.createElement('p')    
-    title.innerHTML = element.name
+    const title = document.createElement('p')
+    if (element.name.length >= 25) {
+      title.innerHTML = element.name.substr(0,25) + '...'
+    } else {
+      title.innerHTML = element.name
+    }
     const time = document.createElement('p')
     time.innerHTML = '<i class="far fa-regular fa-clock"></i>&nbsp;' + element.time + '&nbsp;min'
     divInfoUp.appendChild(title)
@@ -179,7 +242,12 @@ function displayRecipes(data) {
     element.ingredients.forEach(element =>{
         const ingredient = document.createElement('p')
         if (element.unit) {
-          ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>'+ ': ' + element.quantity + ' ' + element.unit
+          if (element.unit == 'grammes') {
+            ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>'+ ': ' + element.quantity + ' g'
+          } else {
+            ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>'+ ': ' + element.quantity + ' ' + element.unit
+          }
+          
         } else if (element.quantity) {
           ingredient.innerHTML = '<strong>' + element.ingredient + '</strong>' + ': ' + element.quantity
         } else {
@@ -189,7 +257,7 @@ function displayRecipes(data) {
     })
 
     const recipe = document.createElement('p')
-    recipe.innerHTML = element.description
+    recipe.innerHTML = element.description.substr(0,160) + '...'
     divInfoDown.appendChild(divRecipe)
     divRecipe.appendChild(recipe)
 });
