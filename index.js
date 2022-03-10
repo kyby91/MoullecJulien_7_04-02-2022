@@ -63,25 +63,25 @@ fetch('recipes.json').then(response => {
     }
 
     function creatTag(nameTag, tagType){
-        let divTag = document.createElement('div')
-        divTag.setAttribute('class', 'badge-' + tagType)
+      let divTag = document.createElement('div')
+      divTag.setAttribute('class', 'badge-' + tagType)
 
-        let p = document.createElement('p')
-        p.innerHTML = nameTag
+      let p = document.createElement('p')
+      p.innerHTML = nameTag
 
-        let img = document.createElement('img')
-        img.setAttribute('src', 'Quit.png')
+      let img = document.createElement('img')
+      img.setAttribute('src', 'Quit.png')
 
-        console.log(divTag);
-        divTag.appendChild(p)
-        divTag.appendChild(img)
+      console.log(divTag);
+      divTag.appendChild(p)
+      divTag.appendChild(img)
 
-        img.addEventListener('click', e => {
-          console.log('ok',e.target.parentNode.remove())
-          filterTags()
-        })
+      img.addEventListener('click', e => {
+        console.log('ok',e.target.parentNode.remove())
+        filterTags()
+      })
 
-        badge.appendChild(divTag)
+      badge.appendChild(divTag)
     }
 
     function setTag(tab , tagType){
@@ -89,9 +89,15 @@ fetch('recipes.json').then(response => {
       let boxTagList = document.getElementById('box-' + tagType)
 
       searchInput.addEventListener('click', ()=> {
+        boxTagList.innerHTML = ""
         displayIngr(tab, boxTagList, tagType)
         boxTagList.style.display = 'flex'
+        // document.body.addEventListener('click', closeBox, true);
       })
+
+      // function closeBox(){
+      //   boxTagList.style.display = 'none'
+      // }
 
       //Lancer fonction de recharche
       searchInput.addEventListener('keyup', (key) =>{
@@ -99,14 +105,14 @@ fetch('recipes.json').then(response => {
         if (value.length>= 3) {
           const filterRecipe = tab.filter((tab) =>{
             return (
-              tab.includes(value) 
+              tab.toLowerCase().includes(value) 
             )
           })
-          box.innerHTML = ""
+          boxTagList.innerHTML = ""
           console.log(filterRecipe);
           displayIngr(filterRecipe, boxTagList, tagType)
         } else {
-          box.innerHTML = ""
+          boxTagList.innerHTML = ""
           console.log(tab);
           displayIngr(tab, boxTagList, tagType)
         }    
@@ -116,26 +122,6 @@ fetch('recipes.json').then(response => {
     }
 
 
-    //fnc createTagHTML(tagName = "Coco" , tagType = "ingredient")
-    // function createTagHTML() {
-    // }
-
-
-
-    // searchInput.addEventListener('click', ()=>{
-
-
-    
-    // searchIngr.addEventListener('click', ()=>{
-    //   box.style.display = 'flex'
-    //   // arrowDown.style.display = 'none'
-    //   // arrowUp.style.display = 'block'
-    //   // box.querySelectorAll(".arrowDown").style.display = 'none'
-    //   displayIngr(x)
-    //   // displayTagHTML(y , 'ingredient')
-    // //   displayTagHTML(z , 'applience')
-    // })
-
 
     
 
@@ -143,52 +129,46 @@ fetch('recipes.json').then(response => {
     setTag(y, "apli")
     setTag(z, "ust")
 
-    // searchIngr.addEventListener('keyup', (key) =>{
-    //   const value = key.target.value.toLowerCase()
-    //   let boxTagList = document.getElementById('box-ingr')
-    //   let tagType = "ingr"
-    //   if (value.length>= 3) {
-    //     const filterRecipe = x.filter((x) =>{
-    //       return (
-    //         x.includes(value) 
-    //       )
-    //     })
-    //     box.innerHTML = ""
-    //     console.log(filterRecipe);
-    //     displayIngr(filterRecipe, boxTagList, tagType)
-    //   } else {
-    //     box.innerHTML = ""
-    //     console.log(x);
-    //     displayIngr(x, boxTagList, tagType)
-    //   }    
-    //   console.log(value);
-    // })
-
-
-    // if (value.length>= 3) {
-    //   const filterRecipe = data.filter((data) =>{
-    //     return (            
-    //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  
-    //     )
-    //   })
-    //   card.innerHTML = ""
-    //   displayRecipes(filterRecipe)
-
-    // } else {
-    //   card.innerHTML = ""
-    //   displayRecipes(data)
-    // }
    
     function filterTags() {
       let tags = badge.querySelectorAll('div')
-      console.log(tags[0].innerText , tags);
-      const value = tags[0].innerText.toLowerCase()
+      card.innerHTML = ""
+      
+      // console.log(value);
 
-      tags.forEach(element =>{
-        console.log(element.innerText);
+      for (let i = 0; i < tags.length; i++) {
+        const element = tags[i].innerText.toLowerCase();
+        const filterRecipe = data.filter((data) =>{
+          return (
+            data.name.toLowerCase().includes(element) ||
+            data.ingredients.some(i => i.ingredient.toLowerCase().includes(element))  ||
+            data.ustensils.some(u => u.toLowerCase().includes(element))  ||
+            data.appliance.toLowerCase().includes(element)
+          )
+        })
+        displayRecipes(filterRecipe)
+      }
 
-        //FITRER
-      })
+      // if (tags.length>0) {
+      //   tags.forEach(element =>{
+
+      //   //FITRER
+      //   const value = element.innerText.toLowerCase()
+      //   const filterRecipe = data.filter((data) =>{
+      //     return (
+      //       data.name.toLowerCase().includes(value) ||
+      //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
+      //       data.ustensils.some(u => u.toLowerCase().includes(value))  ||
+      //       data.appliance.toLowerCase().includes(value)
+      //     )
+      //   })
+      //   displayRecipes(filterRecipe)
+      // })
+      // } else {
+      //   card.innerHTML = ""
+      //   displayRecipes(data)
+      // }
+      
     }
 
     // let closeBadge = badge.querySelectorAll('img')
@@ -289,3 +269,4 @@ function searchBar(data) {
     console.log(value);
   })
 }
+

@@ -132,22 +132,22 @@ input[type=search]::-webkit-search-cancel-button {
 .wrapper {
   width: fit-content;
 }
-.wrapper #container-ingredient {
-  background-color: #3282F7;
-}
 .wrapper #container-ingredient input {
   background-color: #3282F7;
 }
-.wrapper #container-appliance {
-  background-color: #68D9A4;
+.wrapper #container-ingredient #box-ingr {
+  background-color: #3282F7;
 }
 .wrapper #container-appliance input {
   background-color: #68D9A4;
 }
-.wrapper #container-ustensils {
-  background-color: #ED6454;
+.wrapper #container-appliance #box-apli {
+  background-color: #68D9A4;
 }
 .wrapper #container-ustensils input {
+  background-color: #ED6454;
+}
+.wrapper #container-ustensils #box-ust {
   background-color: #ED6454;
 }
 .wrapper .search-input {
@@ -183,10 +183,18 @@ input[type=search]::-webkit-search-cancel-button {
 }
 .wrapper .search-input .autocom-box {
   overflow-y: auto;
-  display: none;
   flex-wrap: wrap;
   max-height: 400px;
   max-width: 500px;
+  position: absolute;
+  top: 61px;
+  display: none;
+}
+.wrapper .search-input .autocom-box::after {
+  display: flex;
+}
+.wrapper .search-input .autocom-box:focus {
+  width: 500px;
 }
 .wrapper .search-input .autocom-box li {
   list-style: none;
