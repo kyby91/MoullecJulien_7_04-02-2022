@@ -182,12 +182,10 @@ input[type="search"]::-webkit-search-cancel-button {
             border: none;
             border-radius: 5px;
             padding: 20px;
+            outline: none;
+            width: 100%;
             &::placeholder{
                 color: white;
-            }
-            &:focus{
-                outline: none;
-                width: 500px;
             }
         }
         .arrowDown{

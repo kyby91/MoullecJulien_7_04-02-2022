@@ -159,13 +159,11 @@ input[type=search]::-webkit-search-cancel-button {
   border: none;
   border-radius: 5px;
   padding: 20px;
+  outline: none;
+  width: 100%;
 }
 .wrapper .search-input input::placeholder {
   color: white;
-}
-.wrapper .search-input input:focus {
-  outline: none;
-  width: 500px;
 }
 .wrapper .search-input .arrowDown {
   position: absolute;

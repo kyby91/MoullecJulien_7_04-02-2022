@@ -92,12 +92,13 @@ fetch('recipes.json').then(response => {
         boxTagList.innerHTML = ""
         displayIngr(tab, boxTagList, tagType)
         boxTagList.style.display = 'flex'
-        // document.body.addEventListener('click', closeBox, true);
       })
 
-      // function closeBox(){
-      //   boxTagList.style.display = 'none'
-      // }
+      document.body.addEventListener('click', closeBox, true);
+
+      function closeBox(){
+        boxTagList.style.display = 'none'
+      }
 
       //Lancer fonction de recharche
       searchInput.addEventListener('keyup', (key) =>{
@@ -132,42 +133,46 @@ fetch('recipes.json').then(response => {
    
     function filterTags() {
       let tags = badge.querySelectorAll('div')
-      card.innerHTML = ""
+      
       
       // console.log(value);
 
-      for (let i = 0; i < tags.length; i++) {
-        const element = tags[i].innerText.toLowerCase();
-        const filterRecipe = data.filter((data) =>{
-          return (
-            data.name.toLowerCase().includes(element) ||
-            data.ingredients.some(i => i.ingredient.toLowerCase().includes(element))  ||
-            data.ustensils.some(u => u.toLowerCase().includes(element))  ||
-            data.appliance.toLowerCase().includes(element)
-          )
-        })
-        displayRecipes(filterRecipe)
-      }
-
-      // if (tags.length>0) {
-      //   tags.forEach(element =>{
-
-      //   //FITRER
-      //   const value = element.innerText.toLowerCase()
+      // for (let i = 0; i < tags.length; i++) {
+      //   const element = tags[i].innerText.toLowerCase();
       //   const filterRecipe = data.filter((data) =>{
       //     return (
-      //       data.name.toLowerCase().includes(value) ||
-      //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
-      //       data.ustensils.some(u => u.toLowerCase().includes(value))  ||
-      //       data.appliance.toLowerCase().includes(value)
+      //       data.name.toLowerCase().includes(element) ||
+      //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(element))  ||
+      //       data.ustensils.some(u => u.toLowerCase().includes(element))  ||
+      //       data.appliance.toLowerCase().includes(element)
       //     )
       //   })
-      //   displayRecipes(filterRecipe)
-      // })
-      // } else {
       //   card.innerHTML = ""
-      //   displayRecipes(data)
+      //   let b = [...new Set(filterRecipe)]
+      //   displayRecipes(b)
       // }
+      let filterRecipe = data;
+
+      if (tags.length>0) {
+        tags.forEach(element =>{
+
+        //FITRER
+        const value = element.innerText.toLowerCase()
+        filterRecipe = filterRecipe.filter((data) =>{
+          return (
+            data.name.toLowerCase().includes(value) ||
+            data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
+            data.ustensils.some(u => u.toLowerCase().includes(value))  ||
+            data.appliance.toLowerCase().includes(value)
+          )
+        })
+        card.innerHTML = ""
+        displayRecipes(filterRecipe)
+      })
+      } else {
+        card.innerHTML = ""
+        displayRecipes(data)
+      }
       
     }
 
@@ -258,6 +263,10 @@ function searchBar(data) {
           data.appliance.toLowerCase().includes(value)
         )
       })
+
+      // for (recipe of data){
+      //   console.log(recipe.name)
+      // }
       card.innerHTML = ""
       displayRecipes(filterRecipe)
 
