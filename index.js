@@ -228,19 +228,19 @@ function displayRecipes(data) {
 function searchBar(data) {
   searchBtn.addEventListener('keyup', (key) =>{
     const value = key.target.value.toLowerCase()
+    console.log(value);
     
     if (value.length>= 3) {
       console.time()
+      const filterRecipe = data.filter((data) =>{
+        return (
+          data.name.toLowerCase().includes(value) ||
+          data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
+          data.ustensils.some(u => u.toLowerCase().includes(value))  ||
+          data.appliance.toLowerCase().includes(value)
+        )
+      })
 
-      const value = element.innerText.toLowerCase()
-        filterRecipe = filterRecipe.filter((data) =>{
-          return (
-            data.name.toLowerCase().includes(value) ||
-            data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
-            data.ustensils.some(u => u.toLowerCase().includes(value))  ||
-            data.appliance.toLowerCase().includes(value)
-          )
-        })
       console.timeEnd()
       if (filterRecipe.length == 0) {
         card.innerHTML = "Aucun résultat trouvé"
