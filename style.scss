@@ -183,7 +183,6 @@ input[type="search"]::-webkit-search-cancel-button {
             border-radius: 5px;
             padding: 20px;
             outline: none;
-            width: 100%;
             &::placeholder{
                 color: white;
             }
@@ -210,12 +209,6 @@ input[type="search"]::-webkit-search-cancel-button {
             position: absolute;
             top: 61px;
             display: none;
-            &::after{
-                display: flex;
-            }
-            &:focus{
-                width: 500px;
-            }
             li{
                 list-style: none;
                 padding-left: 15px;
@@ -267,3 +260,6 @@ input[type="search"]::-webkit-search-cancel-button {
     }
 }
 
+.width{
+    width: 500px;
+}

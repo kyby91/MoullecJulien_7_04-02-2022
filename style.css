@@ -160,7 +160,6 @@ input[type=search]::-webkit-search-cancel-button {
   border-radius: 5px;
   padding: 20px;
   outline: none;
-  width: 100%;
 }
 .wrapper .search-input input::placeholder {
   color: white;
@@ -187,12 +186,6 @@ input[type=search]::-webkit-search-cancel-button {
   position: absolute;
   top: 61px;
   display: none;
-}
-.wrapper .search-input .autocom-box::after {
-  display: flex;
-}
-.wrapper .search-input .autocom-box:focus {
-  width: 500px;
 }
 .wrapper .search-input .autocom-box li {
   list-style: none;
@@ -235,6 +228,10 @@ input[type=search]::-webkit-search-cancel-button {
   font-size: 13px;
   font-weight: normal;
   margin: 0;
+}
+
+.width {
+  width: 500px;
 }
 
 /*# sourceMappingURL=style.css.map */
