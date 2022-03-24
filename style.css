@@ -160,6 +160,7 @@ input[type=search]::-webkit-search-cancel-button {
   border-radius: 5px;
   padding: 20px;
   outline: none;
+  color: white;
 }
 .wrapper .search-input input::placeholder {
   color: white;
