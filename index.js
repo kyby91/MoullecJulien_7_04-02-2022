@@ -19,8 +19,6 @@ fetch('recipes.json').then(response => {
 
     searchBar(data)
 
-    // let test = "tota"
-    // console.log(test.substr(0,3) + '...')
 
     let arrayIngr = []
     let arrayApp = []
@@ -50,13 +48,9 @@ fetch('recipes.json').then(response => {
         boxTagList.appendChild(li)
 
         li.addEventListener('click', e=>{
-          // console.log(tagType);
-          // console.log(e.target.innerHTML);
           creatTag(e.target.innerHTML, tagType)
           
           filterTags()
-
-          // console.log(closeBadge);
         })
 
       })
@@ -92,17 +86,21 @@ fetch('recipes.json').then(response => {
         boxTagList.innerHTML = ""
         displayIngr(tab, boxTagList, tagType)
         boxTagList.style.display = 'flex'
+        console.log(event.target);
+        event.target.classList.add("width")
       })
 
       document.body.addEventListener('click', closeBox, true);
 
       function closeBox(){
         boxTagList.style.display = 'none'
+        boxTagList.parentNode.querySelector('input').classList.remove("width")
       }
 
       //Lancer fonction de recharche
       searchInput.addEventListener('keyup', (key) =>{
         const value = key.target.value.toLowerCase()
+        console.log(key.target.parentNode.querySelector('div'));
         if (value.length>= 3) {
           const filterRecipe = tab.filter((tab) =>{
             return (
@@ -135,22 +133,7 @@ fetch('recipes.json').then(response => {
       let tags = badge.querySelectorAll('div')
       
       
-      // console.log(value);
-
-      // for (let i = 0; i < tags.length; i++) {
-      //   const element = tags[i].innerText.toLowerCase();
-      //   const filterRecipe = data.filter((data) =>{
-      //     return (
-      //       data.name.toLowerCase().includes(element) ||
-      //       data.ingredients.some(i => i.ingredient.toLowerCase().includes(element))  ||
-      //       data.ustensils.some(u => u.toLowerCase().includes(element))  ||
-      //       data.appliance.toLowerCase().includes(element)
-      //     )
-      //   })
-      //   card.innerHTML = ""
-      //   let b = [...new Set(filterRecipe)]
-      //   displayRecipes(b)
-      // }
+      
       let filterRecipe = data;
 
       if (tags.length>0) {
@@ -175,12 +158,6 @@ fetch('recipes.json').then(response => {
       }
       
     }
-
-    // let closeBadge = badge.querySelectorAll('img')
-    // console.log(closeBadge);
-  
-   
-
   }).catch(error => {
     console.error(error)
 });
@@ -248,34 +225,41 @@ function displayRecipes(data) {
 });
 }
 
-
-
 function searchBar(data) {
   searchBtn.addEventListener('keyup', (key) =>{
     const value = key.target.value.toLowerCase()
-  
+    
     if (value.length>= 3) {
-      const filterRecipe = data.filter((data) =>{
-        return (
-          data.name.toLowerCase().includes(value) ||
-          data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
-          data.ustensils.some(u => u.toLowerCase().includes(value))  ||
-          data.appliance.toLowerCase().includes(value)
-        )
-      })
+      console.time()
+      // const filterRecipe = data.filter((data) =>{
+      //   return (
+      //     data.name.toLowerCase().includes(value) ||
+      //     data.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  ||
+      //     data.ustensils.some(u => u.toLowerCase().includes(value))  ||
+      //     data.appliance.toLowerCase().includes(value)
+      //   )
+      // })
 
-      // for (recipe of data){
-      //   console.log(recipe.name)
-      // }
-      card.innerHTML = ""
-      displayRecipes(filterRecipe)
+      let filterRecipe = [];
+      for (let recipe of data) {
+        if ( recipe.name.toLowerCase().includes(value) || recipe.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  || recipe.ustensils.some(u => u.toLowerCase().includes(value))  || recipe.appliance.toLowerCase().includes(value)) {
+          filterRecipe.push(recipe)
+        }
+      }
+      console.timeEnd()
+      if (filterRecipe.length == 0) {
+        card.innerHTML = "Aucun résultat trouvé"
+        
+        console.log('ok');
+      } else {
+        card.innerHTML = ""
+        displayRecipes(filterRecipe)
+      }
+
 
     } else {
       card.innerHTML = ""
       displayRecipes(data)
     }
-  
-    console.log(value);
   })
 }
-
