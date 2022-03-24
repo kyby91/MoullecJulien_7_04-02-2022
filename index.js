@@ -255,6 +255,8 @@ function searchBar(data) {
     const value = key.target.value.toLowerCase()
   
     if (value.length>= 3) {
+
+      console.time()
       const filterRecipe = data.filter((data) =>{
         return (
           data.name.toLowerCase().includes(value) ||
@@ -264,9 +266,15 @@ function searchBar(data) {
         )
       })
 
-      // for (recipe of data){
-      //   console.log(recipe.name)
-      // }
+      console.timeEnd()
+      if (filterRecipe.length == 0) {
+        card.innerHTML = "Aucun résultat trouvé"
+        
+        console.log('ok');
+      } else {
+        card.innerHTML = ""
+        displayRecipes(filterRecipe)
+      }
       card.innerHTML = ""
       displayRecipes(filterRecipe)
 
