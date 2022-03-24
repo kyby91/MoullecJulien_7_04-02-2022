@@ -64,14 +64,13 @@ fetch('recipes.json').then(response => {
       p.innerHTML = nameTag
 
       let img = document.createElement('img')
-      img.setAttribute('src', 'Quit.png')
+      img.setAttribute('src', 'icons/Quit.png')
 
-      console.log(divTag);
       divTag.appendChild(p)
       divTag.appendChild(img)
 
       img.addEventListener('click', e => {
-        console.log('ok',e.target.parentNode.remove())
+        console.log(e.target.parentNode.remove())
         filterTags()
       })
 
@@ -86,7 +85,6 @@ fetch('recipes.json').then(response => {
         boxTagList.innerHTML = ""
         displayIngr(tab, boxTagList, tagType)
         boxTagList.style.display = 'flex'
-        console.log(event.target);
         event.target.classList.add("width")
       })
 
@@ -100,7 +98,6 @@ fetch('recipes.json').then(response => {
       //Lancer fonction de recharche
       searchInput.addEventListener('keyup', (key) =>{
         const value = key.target.value.toLowerCase()
-        console.log(key.target.parentNode.querySelector('div'));
         if (value.length>= 3) {
           const filterRecipe = tab.filter((tab) =>{
             return (
@@ -108,14 +105,11 @@ fetch('recipes.json').then(response => {
             )
           })
           boxTagList.innerHTML = ""
-          console.log(filterRecipe);
           displayIngr(filterRecipe, boxTagList, tagType)
         } else {
           boxTagList.innerHTML = ""
-          console.log(tab);
           displayIngr(tab, boxTagList, tagType)
         }    
-        console.log(value);
       })
   
     }
@@ -241,8 +235,6 @@ function searchBar(data) {
       console.timeEnd()
       if (filterRecipe.length == 0) {
         card.innerHTML = "Aucun résultat trouvé"
-        
-        console.log('ok');
       } else {
         card.innerHTML = ""
         displayRecipes(filterRecipe)
