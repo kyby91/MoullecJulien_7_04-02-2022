@@ -234,14 +234,14 @@ function searchBar(data) {
         )
       })
 
-      console.timeEnd()
+     
       if (filterRecipe.length == 0) {
         card.innerHTML = "Aucun résultat trouvé"
       } else {
         card.innerHTML = ""
         displayRecipes(filterRecipe)
       }
-
+      console.timeEnd()
 
     } else {
       card.innerHTML = ""
