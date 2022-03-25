@@ -225,21 +225,21 @@ function searchBar(data) {
     
     if (value.length>= 3) {
       console.time()
-      
+      //ok
       let filterRecipe = [];
       for (let recipe of data) {
         if ( recipe.name.toLowerCase().includes(value) || recipe.ingredients.some(i => i.ingredient.toLowerCase().includes(value))  || recipe.ustensils.some(u => u.toLowerCase().includes(value))  || recipe.appliance.toLowerCase().includes(value)) {
           filterRecipe.push(recipe)
         }
       }
-      console.timeEnd()
+      
       if (filterRecipe.length == 0) {
         card.innerHTML = "Aucun résultat trouvé"
       } else {
         card.innerHTML = ""
         displayRecipes(filterRecipe)
       }
-
+      console.timeEnd()
 
     } else {
       card.innerHTML = ""
