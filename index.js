@@ -109,7 +109,7 @@ fetch('recipes.json').then(response => {
         } else {
           boxTagList.innerHTML = ""
           displayIngr(tab, boxTagList, tagType)
-        }
+        }    
       })
   
     }
@@ -233,8 +233,7 @@ function searchBar(data) {
           data.appliance.toLowerCase().includes(value)
         )
       })
-
-     
+      
       if (filterRecipe.length == 0) {
         card.innerHTML = "Aucun résultat trouvé"
       } else {
